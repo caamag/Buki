@@ -1,15 +1,10 @@
-import { Module } from "@nestjs/common";
-import { Controller, Get } from "@nestjs/common";
-
-@Controller()
-class AppController {
-  @Get()
-  getHello(): string {
-    return "Olá Mundo!";
-  }
-}
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
+  imports: [],
   controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
