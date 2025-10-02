@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, IsBoolean } from 'class-validator';
 
-export class CreateProduct {
+export class CreateProductDto {
   @IsNotEmpty({ message: 'O produto deve conter um nome.' })
   @IsString({ message: 'O nome do produto não pode conter números.' })
   name: string;
@@ -17,7 +17,7 @@ export class CreateProduct {
   @IsNumber()
   price: number;
 
-  @IsString()
+  @IsString({ message: 'imagem inválida' })
   image: string;
 
   @IsBoolean()
