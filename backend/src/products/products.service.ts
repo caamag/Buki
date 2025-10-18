@@ -1,6 +1,7 @@
 import { Injectable, HttpException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -81,6 +82,47 @@ export class ProductsService {
 
     return {
       message: `Produto [${productToDelete.name}] deletado com sucesso.`,
+    };
+  }
+
+  async updateProduct(id: number, body: UpdateProductDto) {
+    const productToUpdate = await this.prisma.product.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!productToUpdate)
+      throw new HttpException('Nenhum produto encontrado.', 404);
+
+    if (body.name) {
+      const verifyNameExist = await this.prisma.product.findFirst({
+        where: {
+          name: body.name,
+          id: {
+            not: id,
+          },
+        },
+      });
+
+      if (verifyNameExist) {
+        throw new HttpException(
+          'Já existe outro produto cadastrado com este nome.',
+          400,
+        );
+      }
+    }
+
+    const updatedProduct = await this.prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: body,
+    });
+
+    return {
+      message: 'Produto atualizado com sucesso.',
+      data: updatedProduct,
     };
   }
 }
