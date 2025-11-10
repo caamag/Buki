@@ -50,8 +50,6 @@ export class AuthService {
     return {
       message: 'Usuário logado com sucesso',
       data: {
-        name: user.name,
-        email: user.email,
         token: token,
       },
     };

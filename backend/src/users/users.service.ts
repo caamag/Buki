@@ -2,10 +2,14 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { HashingServiceProtocol } from 'src/auth/hash/hash.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly hashService: HashingServiceProtocol,
+  ) {}
 
   async searchUserById(id: number) {
     const userSearched = await this.prisma.users.findFirst({
@@ -36,8 +40,13 @@ export class UsersService {
         400,
       );
 
+    const passHash = await this.hashService.hash(body.password);
+
     const newUser = await this.prisma.users.create({
-      data: body,
+      data: {
+        ...body,
+        password: passHash,
+      },
       select: {
         name: true,
         email: true,
