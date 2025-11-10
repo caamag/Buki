@@ -3,11 +3,14 @@ import { Get } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UseGuards } from '@nestjs/common';
+import { AuthTokenGuard } from 'src/auth/guard/auth-token.guard';
 
 @Controller('api/users')
 export class UsersController {
   constructor(private service: UsersService) {}
 
+  @UseGuards(AuthTokenGuard)
   @Get(':id')
   findUser(@Param('id') id: string) {
     return this.service.searchUserById(Number(id));
@@ -18,11 +21,13 @@ export class UsersController {
     return this.service.createUser(body);
   }
 
+  @UseGuards(AuthTokenGuard)
   @Patch(':id')
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.service.updateUser(Number(id), body);
   }
 
+  @UseGuards(AuthTokenGuard)
   @Delete(':id')
   deleteUser(@Param('id') id: string) {
     return this.service.deleteUser(Number(id));

@@ -16,6 +16,12 @@ export class UsersService {
       where: {
         id: id,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+      },
     });
 
     if (!userSearched)
