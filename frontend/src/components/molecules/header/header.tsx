@@ -26,7 +26,7 @@ const Header = () => {
           </li>
           <li className="mx-4 cursor-pointer text-2xl pb-2 mt-1">
             <NavLink
-              to={"/categoria"}
+              to={"/categorie"}
               className={({ isActive }) =>
                 `transition-all duration-300 ${
                   isActive
@@ -36,20 +36,6 @@ const Header = () => {
               }
             >
               Categoria
-            </NavLink>
-          </li>
-          <li className="mx-4 cursor-pointer text-2xl pb-2 mt-1">
-            <NavLink
-              to={"/recentes"}
-              className={({ isActive }) =>
-                `transition-all duration-300 ${
-                  isActive
-                    ? "border-b-4 border-b-red-700 text-red-700 py-10"
-                    : "border-b-0 text-gray-800"
-                }`
-              }
-            >
-              Visualizados recentemente
             </NavLink>
           </li>
         </ul>
