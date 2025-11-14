@@ -3,6 +3,8 @@ import { useHome } from "./useHome";
 const Home = () => {
   const helper = useHome();
 
+  console.log(helper.products);
+
   return (
     <div className="max-w-[1000px] mx-auto py-[50px] px-10 text-gray-800">
       <div className="flex flex-col items-center">
@@ -20,6 +22,8 @@ const Home = () => {
           Explorar categorias
         </button>
       </div>
+
+      <div className="w-full flex content-between"></div>
     </div>
   );
 };
