@@ -6,5 +6,6 @@ export interface ProductProps {
   price: number;
   image: string;
   widthStar: boolean;
+  author: string;
   createdAt: string;
 }

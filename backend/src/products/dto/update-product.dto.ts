@@ -28,6 +28,10 @@ export class UpdateProductDto {
   image: string;
 
   @IsOptional()
+  @IsString({ message: 'O nome do autor não pode conter números.' })
+  author: string;
+
+  @IsOptional()
   @IsBoolean()
   widthStar: boolean;
 }

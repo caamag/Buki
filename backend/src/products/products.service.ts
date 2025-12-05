@@ -8,7 +8,15 @@ export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
   async listProducts() {
-    const allProducts = await this.prisma.product.findMany();
+    const allProducts = await this.prisma.product.findMany({
+      select: {
+        name: true,
+        price: true,
+        image: true,
+        author: true,
+        widthStar: true,
+      },
+    });
 
     if (!allProducts) throw new HttpException('Erro ao buscar produtos.', 400);
 

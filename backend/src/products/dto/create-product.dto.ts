@@ -20,6 +20,10 @@ export class CreateProductDto {
   @IsString({ message: 'imagem inválida' })
   image: string;
 
+  @IsNotEmpty({ message: 'O produto deve conter um autor.' })
+  @IsString({ message: 'O nome do autor não pode conter números.' })
+  author: string;
+
   @IsBoolean()
   widthStar: boolean;
 }
