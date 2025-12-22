@@ -1,7 +1,9 @@
 import { useHome } from "./useHome";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const helper = useHome();
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-[1200px] mx-auto py-[50px] px-10 text-gray-800">
@@ -33,7 +35,12 @@ const Home = () => {
             <p className="text-[20px]">
               <span className="text-[12px]">R$</span> {product.price}
             </p>
-            <button className="bg-red-700 text-white py-4 px-14 rounded mt-4 text-[12px] cursor-pointer hover:bg-red-800 hover:text-gray-100 transition-all duration-150">
+            <button
+              onClick={() => {
+                navigate(`/product/${product.id}`);
+              }}
+              className="bg-red-700 text-white py-4 px-14 rounded mt-4 text-[12px] cursor-pointer hover:bg-red-800 hover:text-gray-100 transition-all duration-150"
+            >
               Detalhes
             </button>
           </div>

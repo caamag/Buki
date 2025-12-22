@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //pages
 import Home from "./pages/home";
+import ProductPage from "./pages/product/product";
 
 //components
 import Header from "./components/molecules/header/header";
@@ -13,6 +14,7 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

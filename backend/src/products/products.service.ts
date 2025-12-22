@@ -10,6 +10,7 @@ export class ProductsService {
   async listProducts() {
     const allProducts = await this.prisma.product.findMany({
       select: {
+        id: true,
         name: true,
         price: true,
         image: true,
