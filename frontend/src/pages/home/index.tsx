@@ -1,5 +1,6 @@
 import { useHome } from "./useHome";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/atoms/loader/loader";
 
 const Home = () => {
   const helper = useHome();
@@ -23,28 +24,32 @@ const Home = () => {
         </button>
       </div>
 
-      <div className="w-full flex flex-wrap gap-5 mt-10 justify-between">
-        {helper.products.map((product) => (
-          <div className="w-[200px]">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-[250px] w-auto mb-4 transition-transform duration-300 hover:scale-105"
-            />
-            <h2 className="text-2xl font-semibold">{product.name}</h2>
-            <p className="text-[20px]">
-              <span className="text-[12px]">R$</span> {product.price}
-            </p>
-            <button
-              onClick={() => {
-                navigate(`/product/${product.id}`);
-              }}
-              className="bg-red-700 text-white py-4 px-14 rounded mt-4 text-[12px] cursor-pointer hover:bg-red-800 hover:text-gray-100 transition-all duration-150"
-            >
-              Detalhes
-            </button>
-          </div>
-        ))}
+      <div className="w-full flex flex-wrap gap-5 mt-10 justify-between min-h-[300px] items-center">
+        {helper.loading ? (
+          <Loader />
+        ) : (
+          helper.products.map((product) => (
+            <div className="w-[200px]">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-[250px] w-auto mb-4 transition-transform duration-300 hover:scale-105"
+              />
+              <h2 className="text-2xl font-semibold">{product.name}</h2>
+              <p className="text-[20px]">
+                <span className="text-[12px]">R$</span> {product.price}
+              </p>
+              <button
+                onClick={() => {
+                  navigate(`/product/${product.id}`);
+                }}
+                className="bg-red-700 text-white py-4 px-14 rounded mt-4 text-[12px] cursor-pointer hover:bg-red-800 hover:text-gray-100 transition-all duration-150"
+              >
+                Detalhes
+              </button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

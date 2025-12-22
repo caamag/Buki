@@ -6,10 +6,20 @@ import { type ProductProps } from "../../@types/product";
 export const useHome = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     (async () => {
-      const data = await listProducts();
-      setProducts(data);
+      try {
+        setLoading(true);
+
+        const data = await listProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -20,5 +30,6 @@ export const useHome = () => {
   return {
     products,
     goToCategories,
+    loading,
   };
 };
