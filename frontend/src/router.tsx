@@ -5,6 +5,7 @@ import Home from "./pages/home";
 
 //components
 import Header from "./components/molecules/header/header";
+import Footer from "./components/atoms/footer/footer";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
