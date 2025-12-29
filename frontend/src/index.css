@@ -1,3 +1,12 @@
+/* Remove a borda da div de login em telas <=600px */
+.border-hide-mobile {
+  border-width: 1px;
+}
+@media (max-width: 600px) {
+  .border-hide-mobile {
+    border-width: 0 !important;
+  }
+}
 @import "tailwindcss";
 
 html {
