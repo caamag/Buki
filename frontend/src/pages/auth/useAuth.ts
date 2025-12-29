@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { isValidEmail } from "../../utils/isValidEmail";
 import { toast } from "react-toastify";
-import { registerUser } from "../../service/data/auth";
+import { registerUser, loginUser } from "../../service/data/auth";
 import { type Error } from "../../@types/api";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,12 +66,48 @@ export const useAuth = () => {
           response.data.message || "Usuário registrado com sucesso!"
         );
       }
+
+      await signIn();
     } catch (error) {
       let err = error as Error;
 
       toast.error(
         err.response.data.message ||
           "Erro ao registrar usuário. Tente novamente mais tarde."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signIn = async () => {
+    if (!email || !password) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      toast.error("Por favor, insira um email válido.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await loginUser(email, password);
+      localStorage.setItem("authToken", response.data.token);
+      navigate("/");
+    } catch (error) {
+      let err = error as Error;
+
+      if (err.response.data.statusCode === 404) {
+        toast.error("Usuário não encontrado. Verifique suas credenciais.");
+        return;
+      }
+
+      toast.error(
+        err.response.data.message ||
+          "Erro ao entrar. Tente novamente mais tarde."
       );
     } finally {
       setLoading(false);
@@ -86,5 +125,6 @@ export const useAuth = () => {
     handleConfirmPasswordChange,
     loading,
     handleRegister,
+    signIn,
   };
 };

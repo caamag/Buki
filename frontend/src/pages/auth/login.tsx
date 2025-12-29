@@ -19,15 +19,23 @@ const Login = () => {
         <input
           type="email"
           className="border border-gray-300 rounded-2xl p-4 text-2xl outline-none -mt-5"
+          value={auth.email}
+          onChange={auth.handleEmailChange}
         />
 
         <p className="text-[14px]">Senha</p>
         <input
           type="password"
           className="border border-gray-300 rounded-2xl p-4 px-2 text-2xl outline-none -mt-5"
+          value={auth.password}
+          onChange={auth.handlePasswordChange}
         />
 
-        <button className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed">
+        <button
+          className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed"
+          onClick={auth.signIn}
+          disabled={auth.loading}
+        >
           Entrar
         </button>
 
