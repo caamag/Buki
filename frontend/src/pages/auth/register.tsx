@@ -1,7 +1,13 @@
 import Logo from "../../../assets/logo.png";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "./useAuth";
+
+//components
+import Loader from "../../components/atoms/loader/loader";
 
 const Register = () => {
+  const auth = useAuth();
+
   return (
     <div className="w-screen h-screen flex items-center justify-center flex-col gap-10">
       <img src={Logo} alt="" className="w-44" />
@@ -16,28 +22,40 @@ const Register = () => {
         <input
           type="text"
           className="border border-gray-300 rounded-2xl p-4 text-2xl outline-none -mt-5"
+          value={auth.name}
+          onChange={auth.handleNameChange}
         />
 
         <p className="text-[14px]">Email</p>
         <input
           type="email"
           className="border border-gray-300 rounded-2xl p-4 text-2xl outline-none -mt-5"
+          value={auth.email}
+          onChange={auth.handleEmailChange}
         />
 
         <p className="text-[14px]">Senha</p>
         <input
           type="password"
           className="border border-gray-300 rounded-2xl p-4 px-2 text-2xl outline-none -mt-5"
+          value={auth.password}
+          onChange={auth.handlePasswordChange}
         />
 
         <p className="text-[14px]">Confirme sua senha</p>
         <input
           type="password"
           className="border border-gray-300 rounded-2xl p-4 px-2 text-2xl outline-none -mt-5"
+          value={auth.confirmPassword}
+          onChange={auth.handleConfirmPasswordChange}
         />
 
-        <button className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer">
-          Registrar
+        <button
+          className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed"
+          onClick={auth.handleRegister}
+          disabled={auth.loading}
+        >
+          {auth.loading ? <Loader size="3xl" /> : "Registrar"}
         </button>
 
         <p className="text-[12px]">

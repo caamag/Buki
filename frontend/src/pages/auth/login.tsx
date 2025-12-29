@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
+import { useAuth } from "./useAuth";
 
 const Login = () => {
+  const auth = useAuth();
+
   return (
     <div className="w-screen h-screen flex items-center justify-center flex-col gap-10">
       <img src={Logo} alt="" className="w-44" />
@@ -24,7 +27,7 @@ const Login = () => {
           className="border border-gray-300 rounded-2xl p-4 px-2 text-2xl outline-none -mt-5"
         />
 
-        <button className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer">
+        <button className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed">
           Entrar
         </button>
 
