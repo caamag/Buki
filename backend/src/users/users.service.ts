@@ -20,6 +20,7 @@ export class UsersService {
         id: true,
         name: true,
         email: true,
+        cartItems: true,
         createdAt: true,
       },
     });
@@ -81,8 +82,10 @@ export class UsersService {
 
       data: body,
       select: {
+        id: true,
         name: true,
         email: true,
+        cartItems: true,
       },
     });
 
