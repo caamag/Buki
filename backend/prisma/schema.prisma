@@ -16,8 +16,6 @@ model Product {
   widthStar Boolean
   author String
   createdAt DateTime? @default(now())
-
-  cartItems ShoppingCart[]
 }
 
 model Users {
@@ -35,10 +33,8 @@ model ShoppingCart {
   userId    Int
   productId Int
   quantity  Int
-  createdAt DateTime @default(now())
 
   user    Users    @relation(fields: [userId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
 
   @@unique([userId, productId])
 }

@@ -20,7 +20,13 @@ export class UsersService {
         id: true,
         name: true,
         email: true,
-        cartItems: true,
+        cartItems: {
+          select: {
+            id: true,
+            productId: true,
+            quantity: true,
+          },
+        },
         createdAt: true,
       },
     });
