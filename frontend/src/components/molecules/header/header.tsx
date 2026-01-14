@@ -10,38 +10,7 @@ const Header = () => {
         <NavLink to={"/"}>
           <img src={Logo} alt="Logo" className="h-16" />
         </NavLink>
-
-        <ul className="flex gap-5">
-          <li className="mx-4 cursor-pointer text-2xl pb-2 mt-1">
-            <NavLink
-              to={"/"}
-              className={({ isActive }) =>
-                `transition-all duration-300 ${
-                  isActive
-                    ? "border-b-4 border-b-red-700 text-red-700 py-10"
-                    : "border-b-0 text-gray-800"
-                }`
-              }
-            >
-              Página inicial
-            </NavLink>
-          </li>
-          <li className="mx-4 cursor-pointer text-2xl pb-2 mt-1">
-            <NavLink
-              to={"/categorie"}
-              className={({ isActive }) =>
-                `transition-all duration-300 ${
-                  isActive
-                    ? "border-b-4 border-b-red-700 text-red-700 py-10"
-                    : "border-b-0 text-gray-800"
-                }`
-              }
-            >
-              Categoria
-            </NavLink>
-          </li>
-        </ul>
-
+        /*Aqui ficará a barra de search*/
         <div className="flex gap-15">
           <CiShoppingCart className="text-5xl text-red-700 cursor-pointer" />
           <RxAvatar className="text-5xl text-red-700 cursor-pointer" />
