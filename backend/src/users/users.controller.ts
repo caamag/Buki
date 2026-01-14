@@ -5,18 +5,20 @@ import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UseGuards } from '@nestjs/common';
 import { AuthTokenGuard } from 'src/auth/guard/auth-token.guard';
+import { type IncomingHttpHeaders } from 'http';
+import { Headers } from '@nestjs/common';
 
 @Controller('api/users')
 export class UsersController {
   constructor(private service: UsersService) {}
 
   @UseGuards(AuthTokenGuard)
-  @Get(':id')
-  findUser(@Param('id') id: string) {
-    return this.service.searchUserById(Number(id));
+  @Get()
+  findUser(@Headers() headers: IncomingHttpHeaders) {
+    return this.service.searchUserById(headers);
   }
 
-  @Post()
+  @Post('/me')
   createUser(@Body() body: CreateUserDto) {
     return this.service.createUser(body);
   }

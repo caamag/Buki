@@ -1,20 +1,34 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Inject } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HashingServiceProtocol } from 'src/auth/hash/hash.service';
+import { IncomingHttpHeaders } from 'http';
+import { JwtService } from '@nestjs/jwt';
+import jwtConfig from 'src/auth/config/jwt.config';
+import { type ConfigType } from '@nestjs/config';
 
 @Injectable()
 export class UsersService {
   constructor(
     private prisma: PrismaService,
     private readonly hashService: HashingServiceProtocol,
+    private readonly jwtService: JwtService,
+
+    @Inject(jwtConfig.KEY)
+    private readonly jwt: ConfigType<typeof jwtConfig>,
   ) {}
 
-  async searchUserById(id: number) {
+  async searchUserById(headers: IncomingHttpHeaders) {
+    const token = headers.authorization?.split(' ')[1];
+    let userId: number;
+
+    const payload = await this.jwtService.verifyAsync(token ?? '', this.jwt);
+    userId = payload.sub;
+
     const userSearched = await this.prisma.users.findFirst({
       where: {
-        id: id,
+        id: Number(userId),
       },
       select: {
         id: true,
