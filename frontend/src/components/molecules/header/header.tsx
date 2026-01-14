@@ -10,7 +10,6 @@ const Header = () => {
         <NavLink to={"/"}>
           <img src={Logo} alt="Logo" className="h-16" />
         </NavLink>
-        /*Aqui ficará a barra de search*/
         <div className="flex gap-15">
           <CiShoppingCart className="text-5xl text-red-700 cursor-pointer" />
           <RxAvatar className="text-5xl text-red-700 cursor-pointer" />
