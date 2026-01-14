@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import { registerUser, loginUser } from "../../service/data/auth";
 import { type Error } from "../../@types/api";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/authContext";
 
 export const useAuth = () => {
   const navigate = useNavigate();
+  const { saveToken } = useAuthContext();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -67,7 +69,7 @@ export const useAuth = () => {
         );
       }
 
-      await signIn();
+      await signIn(true);
     } catch (error) {
       let err = error as Error;
 
@@ -80,7 +82,7 @@ export const useAuth = () => {
     }
   };
 
-  const signIn = async () => {
+  const signIn = async (isRegisterFlow: boolean) => {
     if (!email || !password) {
       toast.error("Por favor, preencha todos os campos.");
       return;
@@ -95,7 +97,13 @@ export const useAuth = () => {
 
     try {
       const response = await loginUser(email, password);
-      localStorage.setItem("authToken", response.data.token);
+      const newToken = response.data.token;
+      saveToken(newToken);
+
+      if (!isRegisterFlow) {
+        toast.success("Login realizado com sucesso!");
+      }
+
       navigate("/");
     } catch (error) {
       let err = error as Error;

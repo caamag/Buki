@@ -13,3 +13,12 @@ export const loginUser = async (email: string, password: string) => {
   const response = await api.post("/auth", { email, password });
   return response.data;
 };
+
+export const getCurrentUserData = async () => {
+  const response = await api.get("/", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    },
+  });
+  return response.data;
+};

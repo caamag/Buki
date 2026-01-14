@@ -2,17 +2,39 @@ import Logo from "../../../../assets/logo.png";
 import { CiShoppingCart } from "react-icons/ci";
 import { RxAvatar } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
+import { useHeader } from "../useHeader";
 
 const Header = () => {
+  const { showUserMenu, toggleUserMenu, menuRef } = useHeader();
+
   return (
     <header className="w-screen h-30 border-b border-b-gray-200 flex justify-center">
       <div className="max-w-[1200px] w-full h-full flex items-center justify-between px-10">
         <NavLink to={"/"}>
           <img src={Logo} alt="Logo" className="h-16" />
         </NavLink>
-        <div className="flex gap-15">
+        <div className="flex gap-15 relative">
           <CiShoppingCart className="text-5xl text-red-700 cursor-pointer" />
-          <RxAvatar className="text-5xl text-red-700 cursor-pointer" />
+          <RxAvatar
+            className="text-5xl text-red-700 cursor-pointer"
+            onClick={toggleUserMenu}
+          />
+
+          {showUserMenu && (
+            <div
+              ref={menuRef}
+              className="w-[100px] absolute top-18 right-0 bg-white border border-gray-300 p-4"
+            >
+              <ul className="w-full text-center">
+                <li className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700">
+                  Conta
+                </li>
+                <li className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700">
+                  Entrar
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </header>

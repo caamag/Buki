@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuthContext } from "./context/authContext";
 
 //pages
 import Home from "./pages/home";
@@ -19,6 +20,8 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Router = () => {
+  const { token } = useAuthContext();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -38,8 +41,8 @@ const Router = () => {
             </DefaultLayout>
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={token ? <Home /> : <Login />} />
+        <Route path="/register" element={token ? <Home /> : <Register />} />
       </Routes>
     </BrowserRouter>
   );
