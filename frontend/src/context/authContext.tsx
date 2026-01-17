@@ -25,9 +25,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     (async () => {
-      setSetupLoading(true);
       const tokenFromStorage = localStorage.getItem("authToken");
       if (tokenFromStorage) {
+        setSetupLoading(true);
         setToken(tokenFromStorage);
 
         const userData = await getCurrentUserData();
@@ -37,14 +37,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     })();
   }, []);
 
-  const saveToken = (token: string) => {
+  const saveToken = async (token: string) => {
     setToken(token);
     localStorage.setItem("authToken", token);
+
+    const userData = await getCurrentUserData();
+    setCurrentUser(userData.data);
   };
 
   const invalidateToken = () => {
     setToken("");
     localStorage.removeItem("authToken");
+    setCurrentUser(null);
+    console.log(currentUser);
   };
 
   return (

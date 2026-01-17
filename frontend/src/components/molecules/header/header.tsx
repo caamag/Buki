@@ -28,7 +28,12 @@ const Header = () => {
               className="w-[100px] absolute top-18 right-0 bg-white border border-gray-300 p-4"
             >
               <ul className="w-full text-center">
-                <li className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700">
+                <li
+                  className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700"
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
                   Conta
                 </li>
                 {helper.currentUser ? (

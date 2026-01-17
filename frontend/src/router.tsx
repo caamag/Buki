@@ -6,11 +6,12 @@ import Home from "./pages/home";
 import ProductPage from "./pages/product/product";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
-import Loader from "./components/atoms/loader/loader";
+import ProfilePage from "./pages/profile";
 
 //components
 import Header from "./components/molecules/header/header";
 import Footer from "./components/atoms/footer/footer";
+import Loader from "./components/atoms/loader/loader";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -47,6 +48,15 @@ const Router = () => {
           element={
             <DefaultLayout>
               <ProductPage />
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <DefaultLayout>
+              <ProfilePage />
             </DefaultLayout>
           }
         />
