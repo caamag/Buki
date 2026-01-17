@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import ProductPage from "./pages/product/product";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
+import Loader from "./components/atoms/loader/loader";
 
 //components
 import Header from "./components/molecules/header/header";
@@ -20,7 +21,15 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Router = () => {
-  const { token } = useAuthContext();
+  const { token, setupLoading } = useAuthContext();
+
+  if (setupLoading) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>

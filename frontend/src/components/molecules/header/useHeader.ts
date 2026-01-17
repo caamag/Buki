@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
+import { useAuthContext } from "../../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export const useHeader = () => {
+  const navigate = useNavigate();
+  const { currentUser, invalidateToken } = useAuthContext();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -21,9 +25,16 @@ export const useHeader = () => {
     };
   }, [showUserMenu, toggleUserMenu]);
 
+  const logOut = () => {
+    invalidateToken();
+    navigate("/login");
+  };
+
   return {
     showUserMenu,
     toggleUserMenu,
     menuRef,
+    currentUser,
+    logOut,
   };
 };

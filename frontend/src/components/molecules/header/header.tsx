@@ -2,10 +2,12 @@ import Logo from "../../../../assets/logo.png";
 import { CiShoppingCart } from "react-icons/ci";
 import { RxAvatar } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
-import { useHeader } from "../useHeader";
+import { useHeader } from "./useHeader";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { showUserMenu, toggleUserMenu, menuRef } = useHeader();
+  const helper = useHeader();
+  const navigate = useNavigate();
 
   return (
     <header className="w-screen h-30 border-b border-b-gray-200 flex justify-center">
@@ -17,21 +19,35 @@ const Header = () => {
           <CiShoppingCart className="text-5xl text-red-700 cursor-pointer" />
           <RxAvatar
             className="text-5xl text-red-700 cursor-pointer"
-            onClick={toggleUserMenu}
+            onClick={helper.toggleUserMenu}
           />
 
-          {showUserMenu && (
+          {helper.showUserMenu && (
             <div
-              ref={menuRef}
+              ref={helper.menuRef}
               className="w-[100px] absolute top-18 right-0 bg-white border border-gray-300 p-4"
             >
               <ul className="w-full text-center">
                 <li className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700">
                   Conta
                 </li>
-                <li className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700">
-                  Entrar
-                </li>
+                {helper.currentUser ? (
+                  <li
+                    className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700"
+                    onClick={helper.logOut}
+                  >
+                    Sair
+                  </li>
+                ) : (
+                  <li
+                    className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700"
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Entrar
+                  </li>
+                )}
               </ul>
             </div>
           )}

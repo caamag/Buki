@@ -12,13 +12,12 @@ import { Headers } from '@nestjs/common';
 export class UsersController {
   constructor(private service: UsersService) {}
 
-  @UseGuards(AuthTokenGuard)
-  @Get()
+  @Get('/me')
   findUser(@Headers() headers: IncomingHttpHeaders) {
-    return this.service.searchUserById(headers);
+    return this.service.searchCurrentUser(headers);
   }
 
-  @Post('/me')
+  @Post()
   createUser(@Body() body: CreateUserDto) {
     return this.service.createUser(body);
   }

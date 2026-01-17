@@ -19,7 +19,7 @@ export class UsersService {
     private readonly jwt: ConfigType<typeof jwtConfig>,
   ) {}
 
-  async searchUserById(headers: IncomingHttpHeaders) {
+  async searchCurrentUser(headers: IncomingHttpHeaders) {
     const token = headers.authorization?.split(' ')[1];
     let userId: number;
 
