@@ -1,5 +1,8 @@
 import { useAuthContext } from "../../context/authContext";
 
+//components
+import ProductCard from "../../components/molecules/ProductCard";
+
 const ProfilePage = () => {
   const { currentUser } = useAuthContext();
   const userNameInitials = currentUser
@@ -26,7 +29,9 @@ const ProfilePage = () => {
       <div className="w-full mt-20">
         <h2 className="text-4xl font-medium mb-10">Suas compras</h2>
         {currentUser?.cartItems && currentUser?.cartItems.length > 0 ? (
-          currentUser?.cartItems.map(() => <></>)
+          currentUser?.cartItems.map((item) => (
+            <ProductCard id={item.productId} quantity={item.quantity} />
+          ))
         ) : (
           <div className="bg-gray-300 p-4 rounded h-[120px] flex items-center justify-center">
             <p className="text-white text-[14px]">Você não tem compras.</p>
