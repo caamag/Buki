@@ -1,4 +1,4 @@
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/Buki-logo.png";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "./useAuth";
 

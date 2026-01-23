@@ -1,4 +1,4 @@
-import Logo from "../../../../assets/logo.png";
+import Logo from "../../../../assets/Buki-logo.png";
 import { CiShoppingCart } from "react-icons/ci";
 import { RxAvatar } from "react-icons/rx";
 import { NavLink } from "react-router-dom";

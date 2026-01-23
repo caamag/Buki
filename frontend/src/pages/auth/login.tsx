@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/Buki-logo.png";
 import { useAuth } from "./useAuth";
 
 const Login = () => {
@@ -33,7 +33,9 @@ const Login = () => {
 
         <button
           className="bg-red-700 text-white rounded-2xl py-4 text-2xl hover:bg-red-800 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed"
-          onClick={auth.signIn}
+          onClick={() => {
+            auth.signIn(false);
+          }}
           disabled={auth.loading}
         >
           Entrar
