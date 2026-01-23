@@ -41,7 +41,6 @@ export class AuthService {
       },
       {
         secret: this.jwt.secret,
-        expiresIn: this.jwt.jwtTtl as any,
         audience: this.jwt.audience,
         issuer: this.jwt.issuer,
       },
