@@ -25,9 +25,7 @@ export const useProductCard = ({ id }: { id: number }) => {
   const handleDeleteItem = async (cartId: number) => {
     try {
       setLoading(true);
-
       const response = await clearEspecificItemFromCart(cartId.toString());
-      console.log(response);
 
       if (response.status === 200) {
         window.location.reload();
