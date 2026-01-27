@@ -26,7 +26,7 @@ const ProductCard = ({ id, quantity }: ProductCardProps) => {
                 Quantidade: {quantity}
               </p>
               <p className="text-gray-800 font-semibold text-[14px]">
-                R$ {(product?.price || 0) * quantity}
+                R$ {product?.price || 0}
               </p>
             </div>
           </div>
