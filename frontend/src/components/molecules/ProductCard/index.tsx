@@ -1,5 +1,7 @@
 import { useProductCard } from "./useProductCard";
 import { NavLink } from "react-router-dom";
+import { GoTrash } from "react-icons/go";
+import Loader from "../../atoms/loader/loader";
 
 interface ProductCardProps {
   id: number;
@@ -12,11 +14,14 @@ const ProductCard = ({ id, quantity }: ProductCardProps) => {
   return (
     <div className="w-full h-80 bg-gray-100 p-10 border border-gray-200 rounded flex flex-col gap-4">
       {loading ? (
-        <div>
-          <p>Carregando...</p>
+        <div className="w-full h-full flex items-center justify-center">
+          <Loader />
         </div>
       ) : (
-        <div className="w-full h-full flex items-center justify-between">
+        <div className="w-full h-full flex items-center justify-between relative">
+          <button className="absolute top-0 right-4 text-gray-400 hover:text-gray-600 transition cursor-pointer">
+            <GoTrash size={20} />
+          </button>
           <div className="w-full h-full flex gap-10">
             <img src={product?.image} alt={product?.name} className="h-full" />
 
@@ -30,13 +35,12 @@ const ProductCard = ({ id, quantity }: ProductCardProps) => {
               </p>
             </div>
           </div>
-
           <div>
             <button className="w-full bg-blue-500 text-white py-4 px-6 text-[14px] hover:bg-blue-700 transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed">
               Finalizar compra
             </button>
             <NavLink to={`/product/${product?.id}`}>
-              <button className="w-full bg-gray-100 border border-blue-500 text-blue-700 py-4 px-6 text-[14px] hover:bg-blue-700 hover:text-white transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed">
+              <button className="w-full bg-gray-100 border border-blue-500 text-blue-700 py-2 px-6 text-[14px] hover:bg-blue-500 hover:text-white transition mt-2 cursor-pointer disabled:bg-gray-400 disabled:text-white disabled:cursor-not-allowed">
                 Ver detalhes
               </button>
             </NavLink>
