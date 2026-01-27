@@ -4,6 +4,7 @@ export type User = {
   email: string;
   createdAt: string;
   cartItems: Array<{
+    id: number;
     productId: number;
     quantity: number;
   }>;

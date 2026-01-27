@@ -43,7 +43,11 @@ const ProfilePage = () => {
         <h2 className="text-4xl font-medium mb-10">Suas compras</h2>
         {currentUser?.cartItems && currentUser?.cartItems.length > 0 ? (
           currentUser?.cartItems.map((item) => (
-            <ProductCard id={item.productId} quantity={item.quantity} />
+            <ProductCard
+              id={item.productId}
+              quantity={item.quantity}
+              cartId={item.id}
+            />
           ))
         ) : (
           <div className="bg-gray-300 p-4 rounded h-[120px] flex items-center justify-center">

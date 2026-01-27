@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { type ProductProps } from "../../../@types/product";
 import { getProductById } from "../../../service/data/products";
+import { clearEspecificItemFromCart } from "../../../service/data/shopCart";
 import { toast } from "react-toastify";
 
 export const useProductCard = ({ id }: { id: number }) => {
@@ -21,8 +22,28 @@ export const useProductCard = ({ id }: { id: number }) => {
     })();
   }, [id]);
 
+  const handleDeleteItem = async (cartId: number) => {
+    try {
+      setLoading(true);
+
+      const response = await clearEspecificItemFromCart(cartId.toString());
+      console.log(response);
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        toast.error("Erro ao remover o item do carrinho.");
+      }
+    } catch (error) {
+      toast.error("Erro ao remover o item do carrinho.");
+      console.error("Error removing item from cart:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return {
     product,
     loading,
+    handleDeleteItem,
   };
 };

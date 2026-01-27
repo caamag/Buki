@@ -1,7 +1,7 @@
 import { api } from "..";
 
 export const clearEspecificItemFromCart = async (cartId: string) => {
-  return await api.delete(`api/shop-cart/${cartId}`);
+  return await api.delete(`/shop-cart/${cartId}`);
 };
 
 export const cleanShopCart = async (userId: string) => {

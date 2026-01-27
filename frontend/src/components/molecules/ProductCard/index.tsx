@@ -6,10 +6,11 @@ import Loader from "../../atoms/loader/loader";
 interface ProductCardProps {
   id: number;
   quantity: number;
+  cartId: number;
 }
 
-const ProductCard = ({ id, quantity }: ProductCardProps) => {
-  const { product, loading } = useProductCard({ id });
+const ProductCard = ({ id, quantity, cartId }: ProductCardProps) => {
+  const { product, loading, handleDeleteItem } = useProductCard({ id });
 
   return (
     <div className="w-full h-80 bg-gray-100 p-10 border border-gray-200 rounded flex flex-col gap-4">
@@ -19,7 +20,12 @@ const ProductCard = ({ id, quantity }: ProductCardProps) => {
         </div>
       ) : (
         <div className="w-full h-full flex items-center justify-between relative">
-          <button className="absolute top-0 right-4 text-gray-400 hover:text-gray-600 transition cursor-pointer">
+          <button
+            onClick={() => {
+              handleDeleteItem(cartId);
+            }}
+            className="absolute top-0 right-4 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+          >
             <GoTrash size={20} />
           </button>
           <div className="w-full h-full flex gap-10">
