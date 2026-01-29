@@ -16,7 +16,12 @@ const Header = () => {
           <img src={Logo} alt="Logo" className="h-16" />
         </NavLink>
         <div className="flex gap-15 relative">
-          <CiShoppingCart className="text-5xl text-red-700 cursor-pointer" />
+          <CiShoppingCart
+            className="text-5xl text-red-700 cursor-pointer"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          />
           <RxAvatar
             className="text-5xl text-red-700 cursor-pointer"
             onClick={helper.toggleUserMenu}
