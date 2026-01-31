@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UseGuards } from '@nestjs/common';
-import { AuthTokenGuard } from 'src/auth/guard/auth-token.guard';
+import { AuthTokenGuard } from '../auth/guard/auth-token.guard';
 import { type IncomingHttpHeaders } from 'http';
 import { Headers } from '@nestjs/common';
 

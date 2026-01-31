@@ -2,10 +2,10 @@ import { HttpException, Injectable, Inject } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { HashingServiceProtocol } from 'src/auth/hash/hash.service';
+import { HashingServiceProtocol } from '../auth/hash/hash.service';
 import { IncomingHttpHeaders } from 'http';
 import { JwtService } from '@nestjs/jwt';
-import jwtConfig from 'src/auth/config/jwt.config';
+import jwtConfig from '../auth/config/jwt.config';
 import { type ConfigType } from '@nestjs/config';
 
 @Injectable()
