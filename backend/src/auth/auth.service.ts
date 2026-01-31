@@ -1,6 +1,6 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { SignInDto } from './dto/signIn.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { HashingServiceProtocol } from './hash/hash.service';
 import { type ConfigType } from '@nestjs/config';
 import jwtConfig from './config/jwt.config';
