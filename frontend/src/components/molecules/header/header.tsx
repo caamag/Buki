@@ -35,9 +35,7 @@ const Header = () => {
               <ul className="w-full text-center">
                 <li
                   className="m-4 text-[12px] cursor-pointer transition-colors duration-200 hover:text-red-700"
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
+                  onClick={helper.goToAccount}
                 >
                   Conta
                 </li>

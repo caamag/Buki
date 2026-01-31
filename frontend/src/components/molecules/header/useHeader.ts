@@ -30,11 +30,17 @@ export const useHeader = () => {
     navigate("/login");
   };
 
+  const goToAccount = () => {
+    navigate("/profile");
+    setShowUserMenu(false);
+  };
+
   return {
     showUserMenu,
     toggleUserMenu,
     menuRef,
     currentUser,
     logOut,
+    goToAccount,
   };
 };
