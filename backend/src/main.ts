@@ -34,12 +34,7 @@ async function createApp(expressApp?: any) {
     .build();
 
   const document = SwaggerModule.createDocument(app, configSwagger);
-
-  if (expressApp) {
-    SwaggerModule.setup('/api/swagger', expressApp, document);
-  } else {
-    SwaggerModule.setup('/api/swagger', app, document);
-  }
+  SwaggerModule.setup('/api/swagger', app, document);
 
   return app;
 }
