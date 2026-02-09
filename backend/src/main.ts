@@ -49,14 +49,14 @@ async function bootstrap() {
   await app.listen(3000);
 }
 
-export const handler = async (req, res) => {
+export default async function handler(req, res) {
   if (!cachedServer) {
     const expressApp = express();
     await createApp(expressApp);
     cachedServer = serverless(expressApp);
   }
   return cachedServer(req, res);
-};
+}
 
 if (!isServerless) {
   bootstrap();
