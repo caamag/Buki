@@ -2,19 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import serverless from 'serverless-http';
-import { ExpressAdapter } from '@nestjs/platform-express';
-import express from 'express';
 
-let cachedServer;
-
-async function createServer() {
-  const expressApp = express();
-
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressApp),
-  );
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -22,8 +12,6 @@ async function createServer() {
       transform: true,
     }),
   );
-
-  app.enableCors({ origin: '*' });
 
   const configSwagger = new DocumentBuilder()
     .setTitle('Buki API')
@@ -33,14 +21,8 @@ async function createServer() {
 
   const document = SwaggerModule.createDocument(app, configSwagger);
   SwaggerModule.setup('/api/swagger', app, document);
-  await app.init();
 
-  return serverless(expressApp);
+  await app.listen(3000);
 }
 
-export default async function handler(req, res) {
-  if (!cachedServer) {
-    cachedServer = await createServer();
-  }
-  return cachedServer(req, res);
-}
+bootstrap();
